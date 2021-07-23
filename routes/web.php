@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Review;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,24 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/reviews', function()
+{
+    $reviews = Review::getAllReviews();
+
+    return view('reviews',
+    [
+        'reviews' => $reviews
+    ]);
+});
+
+Route::get('/reviews/{review}', function($slug)
+{
+
+    return view(
+        'review',
+        [
+            'review' => Review::findSingleReview($slug)
+        ]);
+
+})->whereAlphaNumeric('review');
