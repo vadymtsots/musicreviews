@@ -1,7 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use App\Models\Review;
+use Spatie\YamlFrontMatter\YamlFrontMatter;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,17 +17,15 @@ use App\Models\Review;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+ return view('welcome');
 });
 
 Route::get('/reviews', function()
 {
-    $reviews = Review::getAllReviews();
-
     return view('reviews',
-    [
-        'reviews' => $reviews
-    ]);
+        [
+            'reviews' => Review::getAllReviews()
+        ]);
 });
 
 Route::get('/reviews/{review}', function($slug)
@@ -34,7 +34,7 @@ Route::get('/reviews/{review}', function($slug)
     return view(
         'review',
         [
-            'review' => Review::findSingleReview($slug)
+            'review' => Review::getSingleReview($slug)
         ]);
 
 })->whereAlphaNumeric('review');

@@ -11,12 +11,10 @@
 <body>
 
 <?php foreach($reviews as $review) : ?>
+<h1 class="album_name">
+    <a href="/reviews/<?= $review->slug ?>"><?= $review->title; ?></a>
+</h1>
 
-<section class="review">
-
-    <?= $review ?>
-
-</section>
 
 <?php endforeach; ?>
 
