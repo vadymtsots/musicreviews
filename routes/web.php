@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Route;
 use App\Models\Review;
@@ -20,21 +21,6 @@ Route::get('/', function () {
  return view('welcome');
 });
 
-Route::get('/reviews', function()
-{
-    return view('reviews',
-        [
-            'reviews' => Review::getAllReviews()
-        ]);
-});
+Route::get('/reviews', [ReviewController::class, 'getAllReviews']);
 
-Route::get('/reviews/{review}', function($slug)
-{
-
-    return view(
-        'review',
-        [
-            'review' => Review::getSingleReview($slug)
-        ]);
-
-})->whereAlphaNumeric('review');
+Route::get('/reviews/{id}', [ReviewController::class, 'getSingleReview']);

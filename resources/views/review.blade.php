@@ -1,25 +1,14 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="/main.css">
-    <title><?= $review->title . " " . "- musicreviews" ?></title>
-</head>
-<body>
+    @extends('single_review_layout')
 
-<section class="review">
-    <h1><?= $review->title; ?></h1>
-    <div>
-        <?= $review->body; ?>
-    </div>
-</section>
+    @section('content')
+        <section class="review">
+            <h1> {{$review->album_name}} </h1>
+            <div>
+                {!! $review->review !!}
+            </div>
+        </section>
 
-<section class="back">
-<a href="/reviews">Back</a>
-</section>
-
-</body>
-</html>
+        <section class="back">
+            <a href="/reviews">Back</a>
+        </section>
+    @endsection
