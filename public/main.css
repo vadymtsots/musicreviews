@@ -5,6 +5,7 @@ body {
 .album_name {
     color: rebeccapurple;
     text-align: center;
+    border-bottom: 2px solid grey;
 }
 
 .review {
@@ -17,6 +18,10 @@ body {
     text-align: center;
     font-family: FreeSans, serif;
     font-size: 25px;
+}
+
+#recordType {
+    font-size: 10px
 }
 
 section + section {

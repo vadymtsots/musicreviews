@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RecordType;
 use App\Models\Review;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -11,16 +13,32 @@ class ReviewController extends Controller
     {
         return view('reviews',
             [
-                'reviews' => Review::all()
+                'reviews' => Review::with("recordType")->get()
             ]);
     }
 
-    public function getSingleReview($id)
+    public function getSingleReview(Review $review)
     {
         return view(
             'review',
             [
-                'review' => Review::findOrFail($id)
+                'review' => $review
             ]);
+    }
+
+    public function getRecordType(RecordType $recordType)
+    {
+        return view('reviews',
+            [
+                'reviews' => $recordType->reviews
+            ]);
+    }
+
+    public function getUser(User $user)
+    {
+        return view('reviews',
+        [
+           'reviews' => $user->reviews
+        ]);
     }
 }
