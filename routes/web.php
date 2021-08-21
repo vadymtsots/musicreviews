@@ -26,6 +26,6 @@ Route::get('/reviews', [ReviewController::class, 'getAllReviews']);
 
 Route::get('/reviews/{review}', [ReviewController::class, 'getSingleReview']);
 
-Route::get('/recordTypes/{recordType:name}', [ReviewController::class, 'getRecordType']);
+//Route::get('/?recordType={recordType:name}', [ReviewController::class, 'getRecordType']);
 
 Route::get('/users/{user:name}', [ReviewController::class, 'getUser']);

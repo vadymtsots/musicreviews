@@ -15,6 +15,8 @@ class Review extends Model
      */
     protected $guarded = ['id', 'created_at', 'updated_at', 'published_at'];
 
+    protected $with = ['recordType', 'user'];
+
     /**
      * @return BelongsTo
      */
@@ -34,5 +36,25 @@ class Review extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['search'] ?? false, fn ($query)=>
+                $query
+                    ->where('album_name', 'like', '%' . request('search') . '%')
+                    ->orWhere('artist', 'like', '%' . request('search') . '%'));
+
+
+
+        $query->when($filters['recordType'] ?? false, fn($query, $recordType)=>
+            $query->whereHas('recordType', fn($query) =>
+                $query->where('name', $recordType))
+        );
+
+        $query->when($filters['user'] ?? false, fn($query, $user)=>
+            $query->whereHas('user', fn($query)=>
+                $query->where('name', $user)));
+
     }
 }
